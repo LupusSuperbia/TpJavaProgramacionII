@@ -8,6 +8,8 @@ public class Servicio {
 	private String nombreServicio;
 	private BigDecimal precio;
 	private Date turno;
+
+
 	public int getIdServicio() {
 		return idServicio;
 	}
