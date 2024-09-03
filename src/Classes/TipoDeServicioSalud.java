@@ -1,0 +1,11 @@
+package Classes;
+
+public enum TipoDeServicioSalud {
+	CONSULTA_MEDICA,
+    EXAMEN_DIAGNOSTICO,
+    TRATAMIENTO_FISIOTERAPIA,
+    CIRUGIA,
+    TERAPIA_PSICOLOGICA,
+    INYECCIÓN,
+    CUIDADO_DE_ENFERMOS,
+}

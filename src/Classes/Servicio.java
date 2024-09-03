@@ -1,14 +1,18 @@
 package Classes;
 
-import java.math.BigDecimal;
-import java.sql.Date;
 
-public class Servicio {
+public abstract class Servicio {
 	private int idServicio; 
 	private String nombreServicio;
-	private BigDecimal precio;
-	private Date turno;
-
+	private String duracionServicio;
+	private static int maxIdServicio;
+	public abstract String getTipo();
+	
+	public Servicio(String nombre) {
+		this.nombreServicio = nombre; 
+		Servicio.maxIdServicio += 1;
+		this.idServicio = Servicio.maxIdServicio;
+	}
 
 	public int getIdServicio() {
 		return idServicio;
@@ -22,18 +26,17 @@ public class Servicio {
 	public void setNombreServicio(String nombreServicio) {
 		this.nombreServicio = nombreServicio;
 	}
-	public BigDecimal getPrecio() {
-		return precio;
+	
+	
+
+	
+	
+	@Override
+	public String toString() {
+		return "Servicio [idServicio=" + idServicio + ", nombreServicio=" + nombreServicio + ", duracionServicio="
+				+ duracionServicio + "]";
 	}
-	public void setPrecio(BigDecimal precio) {
-		this.precio = precio;
-	}
-	public Date getTurno() {
-		return turno;
-	}
-	public void setTurno(Date turno) {
-		this.turno = turno;
-	}
+	
 	
 	
 	
