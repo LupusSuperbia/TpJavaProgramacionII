@@ -29,6 +29,14 @@ public class Pago {
 	  System.out.println("El estado del pago del usuario " +this.cliente.getNombre() + " hacia el proveedor de servicio " + this.pdServicio.getNombre() + " es de un total de " + monto + " por lo tanto queda un total de  " + (cliente.obtenerSolicitudCreada().getMonto()) + " a pagar y se encuentra en estado " + (this.status ? "pagado" : "no pagado"));
   } 
   
+  public void pagarMontoSolicitud(String estadoTrabajo, boolean pagado, double totalPagado, double monto) {
+	  cliente.obtenerSolicitudCreada().setEstadoDelTrabajo(estadoTrabajo);
+	  cliente.obtenerSolicitudCreada().setPagado(pagado);
+	  cliente.obtenerSolicitudCreada().setTotalPagado(totalPagado);
+	  cliente.obtenerSolicitudCreada().setMonto(monto);
+  }
+  
+  
   public boolean confirmarPago(double monto) {
 	  
 	  if(metodoDePago instanceof TarjetaDeCredito) {
@@ -39,17 +47,12 @@ public class Pago {
 		System.out.println("El pago ha sido en efectivo");
 	}
 	  if(cliente.obtenerSolicitudCreada().getMonto() == monto) {
-		  cliente.obtenerSolicitudCreada().setEstadoDelTrabajo("Terminado");
-		  cliente.obtenerSolicitudCreada().setPagado(true);
-		  cliente.obtenerSolicitudCreada().setTotalPagado(monto);
+		  pagarMontoSolicitud("Terminado", true, monto, 0);
 		  
 		  return true; 
 	  } else {
-		  System.out.println("El pago no se ha realizado pero se desconto " + monto + " del total del servicio que era: " + cliente.obtenerSolicitudCreada().getMonto());
-		  cliente.obtenerSolicitudCreada().setMonto(cliente.obtenerSolicitudCreada().getMonto() - monto);
-		  cliente.obtenerSolicitudCreada().setEstadoDelTrabajo("Falta completar pago");
-		  cliente.obtenerSolicitudCreada().setPagado(false);
-		  cliente.obtenerSolicitudCreada().setTotalPagado(monto);
+		  System.out.println("El pago no se ha realizado pero se desconto " + monto + " del total del servicio que era: $" + cliente.obtenerSolicitudCreada().getMonto());
+		  pagarMontoSolicitud("Falta completar pago", false, monto, (cliente.obtenerSolicitudCreada().getMonto() - monto));
 		  return false;
 	  } 
 	  

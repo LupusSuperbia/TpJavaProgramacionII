@@ -1,4 +1,6 @@
-package Classes; 
+package Classes;
+
+import java.util.List;
 
 public abstract class Persona{
 	// Atributos
@@ -8,6 +10,7 @@ public abstract class Persona{
 	protected static int maxId; 
 	private int edad; 
 	private String rol;
+	protected List<SolicitudServicio> solicitudes;
 	
 	
 	 public Persona(String nombre, String rol, String cvu) {

@@ -1,11 +1,10 @@
 package menu;
 
 import Classes.AdministradorProveedor;
-import utils.Utilidades;
 
 public class MenuProveedor extends Menu{
-	Utilidades utils = new Utilidades();
 	private AdministradorProveedor adminProveedor;
+	
 	
 	public MenuProveedor(AdministradorProveedor adminProveedor) {
 		this.adminProveedor = adminProveedor;

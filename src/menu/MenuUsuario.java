@@ -14,15 +14,11 @@ import Classes.SolicitudServicio;
 import Classes.TarjetaDeCredito;
 import Classes.TransferenciaBancaria;
 import Classes.Usuario;
-import utils.Utilidades;
+
 
 public class MenuUsuario extends Menu{
-	private Scanner scanner = new Scanner(System.in);
-	private Utilidades utils = new Utilidades();
 	private AdministradorUsuario adminUsuarios;
 	private AdministradorProveedor adminProveedor;
-	private boolean salir = false;
-	private boolean menuSalir = true;
 	private Usuario usuario;
 	
 	// CONSTRUCTOR NECESARIO PARA PODER USAR LAS LISTAS CREADAS
@@ -162,16 +158,16 @@ public class MenuUsuario extends Menu{
 	// A través de un for each mostramos todos los servicios que pidio nuestro usuario 
 	private void mostrarServiciosContratados() {
 		List<SolicitudServicio> servicios = this.usuario.getSolicitudes();
-		int i = 0;
+		int i = 1;
 		if(!servicios.isEmpty()) {
 			System.out.println("Los servicios contratados son los siguiente :");
 			
 			for (SolicitudServicio servicio : servicios) {
 				
 				System.out.println(i + " - Nombre del proveedor :" + servicio.getPvServicio().getNombre() +
-						"\n El precio por día es de :" + servicio.getPvServicio().getPrecio() + 
+						"\n El precio por día es de : $" + servicio.getPvServicio().getPrecio() + 
 						" \n El estado del trabajo es : " + servicio.getEstadoDelTrabajo() + 
-						"\n El total pagado: "+ servicio.getTotalPagado());
+						"\n El total pagado: $"+ servicio.getTotalPagado());
 				i++;
 			} 			
 		} else {
@@ -246,11 +242,11 @@ public class MenuUsuario extends Menu{
 					System.out.println("Ingrese el total de dias tiene que ser minimo 1");
 				}
 			}				
-			while (totalDias > 0);
+			while (totalDias == 0);
 			usuario.confirmarTareaTerminada(totalDias);	
 		}
 		monto = servicio.getMonto();
-		System.out.println("El monto total a pagar es de: " + monto);
+		System.out.println("El monto total a pagar es de: $" + monto);
 		System.out.println("Ingrese la cantidad que desea pagar");
 		montoAPagar = scanner.nextDouble();
 		this.usuario.realizarPago(metodoDePago, montoAPagar);

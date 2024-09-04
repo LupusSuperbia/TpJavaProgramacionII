@@ -6,7 +6,6 @@ import java.util.List;
 // Nuestra clase usuario extiende de persona
 public class Usuario extends Persona {
 	private SolicitudServicio solicitud;
-	private List<SolicitudServicio> solicitudes;
 	
 	public Usuario(String nombre, String cvu){
 		super(nombre, "Cliente", cvu); // Esto llama al constructor del padre de la clase o sea la super clase 
@@ -72,7 +71,8 @@ public class Usuario extends Persona {
 	// Metodo para realizar el pago del servicio hacia el proveedor
 	public void realizarPago(MetodoDePago metodoDePago, double monto) {
 		Pago pago = new Pago(this, solicitud.getPvServicio(), metodoDePago, monto);
-		if (pago.confirmarPago(monto)) {
+		boolean pagoStatus = pago.confirmarPago(monto);
+		if (pagoStatus) {
 			pago.setStatus(true);
 		} else {
 			pago.setStatus(false);

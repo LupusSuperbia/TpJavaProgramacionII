@@ -1,7 +1,6 @@
 package Classes;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 
@@ -15,7 +14,7 @@ public class ProveedorServicio<T extends Servicio>  extends Persona{
     private double precio; 
     private boolean disponibilidad; 
     private String comentarios;
-    private List<SolicitudServicio> solicitudes;
+    
     
     
     public ProveedorServicio(String nombre,String comentarios, String cvu, double precio, T servicioPrestado) {
