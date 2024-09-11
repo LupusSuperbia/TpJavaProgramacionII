@@ -8,8 +8,7 @@ public class Pago {
   private ProveedorServicio<? extends Servicio> pdServicio;
   private MetodoDePago metodoDePago;
   private static int maxId;
-  private SolicitudServicio servicioSolicitado;
-  
+
   
   public Pago(Usuario cliente, ProveedorServicio<? extends Servicio> pdServicio, MetodoDePago metodoDePago,  double monto) {
 	this.cliente = cliente; 
@@ -26,7 +25,7 @@ public class Pago {
   
   
   public void verPago() {
-	  System.out.println("El estado del pago del usuario " +this.cliente.getNombre() + " hacia el proveedor de servicio " + this.pdServicio.getNombre() + " es de un total de " + monto + " por lo tanto queda un total de  " + (cliente.obtenerSolicitudCreada().getMonto()) + " a pagar y se encuentra en estado " + (this.status ? "pagado" : "no pagado"));
+	  System.out.println("El estado del pago del usuario " +this.cliente.getNombre() + " hacia el proveedor de servicio " + this.pdServicio.getNombre() + " es de un total de " + monto + " por lo tanto queda un total de  " + (cliente.obtenerSolicitudCreada().getMonto()) + " a pagar y se encuentra en estado " + (this.status ? "PAGADO" : "NO PAGADO"));
   } 
   
   public void pagarMontoSolicitud(String estadoTrabajo, boolean pagado, double totalPagado, double monto) {

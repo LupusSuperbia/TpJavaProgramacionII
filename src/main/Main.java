@@ -1,6 +1,9 @@
 package main;
 
+import java.util.List;
+
 import Classes.AdministradorProveedor;
+import Classes.AdministradorServicio;
 import Classes.AdministradorUsuario;
 import Classes.Efectivo;
 import Classes.MetodoDePago;
@@ -18,16 +21,21 @@ public class Main {
     public static void main(String[] args) {
     	AdministradorUsuario adminUsuarios = new AdministradorUsuario();
         AdministradorProveedor adminProveedor = new AdministradorProveedor();
+        AdministradorServicio adminServicio = new AdministradorServicio();
         
         PrecargaDeMenu precarga = new PrecargaDeMenu();
         Utilidades utilidades = new Utilidades();
-        MenuMain menuMain = new MenuMain(adminUsuarios, adminProveedor);
+        MenuMain menuMain = new MenuMain(adminUsuarios, adminProveedor, adminServicio);
         
-        precarga.precargarDatos(adminProveedor, adminUsuarios);
+        precarga.precargarDatos(adminProveedor, adminUsuarios, adminServicio);
         
         //utilidades.cargaDeDatos();
         
+        List<Servicio> servicios = adminServicio.getObject();
         
+        for (Servicio servicio : servicios) {
+			System.out.println(servicio);
+		}
         
         menuMain.main();
         

@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Classes.AdministradorProveedor;
+import Classes.AdministradorServicio;
 import Classes.AdministradorUsuario;
 import utils.Utilidades;
 
@@ -12,16 +13,18 @@ public class MenuMain extends Menu{
 	private Utilidades utils = new Utilidades();
 	private AdministradorUsuario adminUsuarios;
 	private AdministradorProveedor adminProveedor;
+	private AdministradorServicio adminServicio;
 	private MenuUsuario menuUsuario;
 	private MenuProveedor menuProveedor;
 	private boolean salir = false;
 	
 	
-	public MenuMain(AdministradorUsuario adminUsuarios, AdministradorProveedor adminProveedor) {
+	public MenuMain(AdministradorUsuario adminUsuarios, AdministradorProveedor adminProveedor, AdministradorServicio adminServicio) {
 		this.adminProveedor = adminProveedor;
 		this.adminUsuarios = adminUsuarios;
+		this.adminServicio = adminServicio;
 		this.menuUsuario = new MenuUsuario(this.adminUsuarios, this.adminProveedor);
-		this.menuProveedor = new MenuProveedor(this.adminProveedor);
+		this.menuProveedor = new MenuProveedor(this.adminProveedor, this.adminServicio);
 	}
 	
 	

@@ -19,4 +19,12 @@ public class ServicioSalud extends Servicio{
 	public void setTipo(TipoDeServicioSalud tipo) {
 		this.tipo = tipo;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ServicioSalud [tipo=" + tipo + ", getNombreServicio()=" + getNombreServicio() + "]";
+	}
+	
+	
 }

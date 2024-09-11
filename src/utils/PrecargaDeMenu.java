@@ -1,9 +1,9 @@
 package utils;
 
 import Classes.AdministradorProveedor;
+import Classes.AdministradorServicio;
 import Classes.AdministradorUsuario;
 import Classes.ProveedorServicio;
-import Classes.Servicio;
 import Classes.ServicioDomestico;
 import Classes.ServicioSalud;
 import Classes.TipoDeServicioDomesticos;
@@ -12,7 +12,7 @@ import Classes.Usuario;
 
 public class PrecargaDeMenu {
 	
-	public void precargarDatos(AdministradorProveedor adminProv , AdministradorUsuario adminClien) {
+	public void precargarDatos(AdministradorProveedor adminProv , AdministradorUsuario adminClien, AdministradorServicio adminServicio) {
 		// Creo usuarios de manera predeterminada
 		Usuario usuario1 = new Usuario("Robert", "2543bdcd4");
 		Usuario usuario2 = new Usuario("Carla", "2543bdcd45123");
@@ -27,6 +27,14 @@ public class PrecargaDeMenu {
 		
 		ServicioSalud servicioSalud = new ServicioSalud("Cuidado de enfermos", TipoDeServicioSalud.CUIDADO_DE_ENFERMOS);
 		ServicioSalud servicioSalud1 = new ServicioSalud("Vacunación O inyecciones", TipoDeServicioSalud.INYECCIÓN);
+		
+		adminServicio.addObject(servicioSalud1);
+		adminServicio.addObject(servicioSalud);
+		adminServicio.addObject(servicioDomestico);
+		adminServicio.addObject(servicioDomestico2);
+		adminServicio.addObject(servicioDomestico3);
+		adminServicio.addObject(servicioDomestico4);
+		
 		
 		
 		
