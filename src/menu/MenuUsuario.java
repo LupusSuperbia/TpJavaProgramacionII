@@ -19,15 +19,16 @@ public class MenuUsuario extends Menu{
 	private AdministradorUsuario adminUsuarios;
 	private AdministradorProveedor adminProveedor;
 	private Usuario usuario;
-	
+
 	// CONSTRUCTOR NECESARIO PARA PODER USAR LAS LISTAS CREADAS
 	public MenuUsuario(AdministradorUsuario adminUsuarios, AdministradorProveedor administradorProveedor) {
 		this.adminUsuarios = adminUsuarios;
 		this.adminProveedor = administradorProveedor;
 	}
-	
-	
+
+
 	// Menu Main del usuario
+	@Override
 	public void main() {
 		this.salir = false;
 		while(!salir) {
@@ -35,54 +36,55 @@ public class MenuUsuario extends Menu{
 				utils.menuDecoracion("Bienvenido Al panel de Usuario", "Por favor elija una de las opciones para navegar dentro de los distintos menús:", "Crear Usuario", "Ingresar Como Usuario", "Salir");
 				System.out.println("Ingrese una opción: ");
 				int opcion = scanner.nextInt();
-				menuElegido(opcion);			
+				menuElegido(opcion);
 		} catch (InputMismatchException e) {
 			System.out.println("Ocurrio un error inesperado " + e.getMessage() );
 			scanner.nextLine();
 		}
 		}
-		
+
 	}
 	// Otra funcion donde nos da un switch para que eliga entre distintas opciones
+	@Override
 	public void menuElegido(int numero) {
 		switch (numero) {
 		case 1:
 			crearUsuario();
 			break;
-			
-		case 2: 
+
+		case 2:
 			ingresarComoUsuario();
 			break;
-			
-		case 3: 
+
+		case 3:
 			this.salir = true;
 			return ;
-			
+
 		default:
 			return;
 		}
 	}
-	
-	// crearUsuario es un metodo que nos ayuda a la hora que el usuario o cliente quiera 
+
+	// crearUsuario es un metodo que nos ayuda a la hora que el usuario o cliente quiera
 	// crear un cuenta, solo necesitamos dos datos importantes el nombre y el cvu
 	private void crearUsuario() {
-		// TODO : Esto lo dejo porque más adelante voy a hacer alguna función 
+		// TODO : Esto lo dejo porque más adelante voy a hacer alguna función
 		// para que detecte si el cvu ya esta guardado en los usuarios creados
 		// así no hay duplicacion de datos
-		
+
 		System.out.println("#################################################################################");
 		System.out.println("Por favor ingrese el nombre que desea para su cuenta :");
 		String nombre = scanner.next();
 		System.out.println("Por favor ingrese el cvu que desea para su cuenta :");
 		String cvu = scanner.next();
 		System.out.println("#################################################################################");
-		
+
 		Usuario usuario = new Usuario(nombre, cvu);
 		adminUsuarios.addObject(usuario);
 	}
-	
-	// Esta funcion nos permite poder entrar como algun usuario creado o que este guardado 
-	
+
+	// Esta funcion nos permite poder entrar como algun usuario creado o que este guardado
+
 	private void ingresarComoUsuario() {
 		 	List<Usuario> usuarios = this.adminUsuarios.getObject();
 			System.out.println("#################################################################################");
@@ -98,36 +100,36 @@ public class MenuUsuario extends Menu{
 				if (index >= 0 && usuarios.size() >= index ) {
 					this.usuario  =  usuarios.get(index);
 					menuUsuario();
-					
+
 				} else {
 					System.out.println("Por favor eliga un numero que este dentro del rango");
-				} 
-				
+				}
+
 			} catch (InputMismatchException e) {
 				System.out.println("Error : " + e.getMessage());
 				scanner.nextLine();
 			}
-			
+
 			System.out.println("#################################################################################");
 			System.out.println();
-		
-	}  
-	// El menu del usuario donde va a interactuar para llegar a distintas opciones donde va 
-	// realizar operaciones que necesite 
+
+	}
+	// El menu del usuario donde va a interactuar para llegar a distintas opciones donde va
+	// realizar operaciones que necesite
 	public void menuUsuario() {
 		this.menuSalir = true;
-		while(menuSalir) {	
+		while(menuSalir) {
 			try {
 				System.out.println("#################################################################################");
 				System.out.println("# Ha ingresado al menu Usuario como el cliente " + this.usuario.getNombre());
 				System.out.println("# Elija una de las opciones para que podamos atender lo que necesita nuestro cliente");
 				System.out.println("# AVISO PARA CREAR UN NUEVO CONTRATO DE SERVICIO ES NECESARIO QUE HAYA PAGADO EL ULTIMO");
-				
+
 				utils.menuSinDecoracionSubMenus("Contratar un servicio", "Ver servicio contratado", "Ver servicios contratados", "Salir");
 				int i = scanner.nextInt();
 				menuElegirUsuario(i);
 				System.out.println("#################################################################################");
-				
+
 			} catch (InputMismatchException e) {
 				System.out.println("Error: " + e.getMessage());
 				scanner.nextLine();
@@ -140,49 +142,49 @@ public class MenuUsuario extends Menu{
 		case 1:
 			contratarServicio();
 			break;
-		case 2 : 
+		case 2 :
 			mostrarServicioContratado();
 			break;
 		case 3 :
 			mostrarServiciosContratados();
 			break;
-		case 4 : 
+		case 4 :
 			this.menuSalir = false;
 			return;
 		default:
 			break;
 		}
 	}
-	
-	// A través de un for each mostramos todos los servicios que pidio nuestro usuario 
+
+	// A través de un for each mostramos todos los servicios que pidio nuestro usuario
 	private void mostrarServiciosContratados() {
 		List<SolicitudServicio> servicios = this.usuario.getSolicitudes();
 		int i = 1;
 		if(!servicios.isEmpty()) {
 			System.out.println("Los servicios contratados son los siguiente :");
-			
+
 			for (SolicitudServicio servicio : servicios) {
-				
+
 				System.out.println(i + " - Nombre del proveedor :" + servicio.getPvServicio().getNombre() +
-						"\n El precio por día es de : $" + servicio.getPvServicio().getPrecio() + 
-						" \n El estado del trabajo es : " + servicio.getEstadoDelTrabajo() + 
+						"\n El precio por día es de : $" + servicio.getPvServicio().getPrecio() +
+						" \n El estado del trabajo es : " + servicio.getEstadoDelTrabajo() +
 						"\n El total pagado: $"+ servicio.getTotalPagado());
 				i++;
-			} 			
+			}
 		} else {
 			System.out.println("No hay servicios que haya contratado");
 		}
 	}
-	
+
 	// Muestra el servicio que contrato el usuario
 	private void mostrarServicioContratado() {
 		SolicitudServicio servicio = this.usuario.obtenerSolicitudCreada();
-		
+
 		if(servicio != null && !servicio.isPagado() ) {
 			System.out.println("El servicio contratado es el siguiente :");
 			System.out.println("Nombre del proveedor :" + servicio.getPvServicio().getNombre() +
-					"\n El tipo de categoria : " + servicio.getPvServicio().getTipoServicio() + " El precio por día es de :" + servicio.getPvServicio().getPrecio() + 
-					" \n El estado del trabajo es : " + servicio.getEstadoDelTrabajo() + 
+					"\n El tipo de categoria : " + servicio.getPvServicio().getTipoServicio() + " El precio por día es de :" + servicio.getPvServicio().getPrecio() +
+					" \n El estado del trabajo es : " + servicio.getEstadoDelTrabajo() +
 					"\n ");
 			System.out.println("Elija una de las dos opciones ");
 			System.out.println("1- Pagar Servicio");
@@ -192,7 +194,7 @@ public class MenuUsuario extends Menu{
 			case 1:
 				pagarServicio(servicio);
 				break;
-			case 2 : 
+			case 2 :
 				return;
 			default:
 				System.out.println("Por favor ingrese un numero valido");
@@ -202,12 +204,12 @@ public class MenuUsuario extends Menu{
 			System.out.println("No hay ningun servicio contratado");
 		}
 	}
-	
+
 	// Este metodo sirve para poder elegir un metodo de pago y lo retornamos para poder efectuar
 	// el pago
 	private MetodoDePago elegirMetodo() {
 		boolean metodoBool = false;
-		while (!metodoBool) {	
+		while (!metodoBool) {
 		int opcion = scanner.nextInt();
 		switch (opcion) {
 		case 1:
@@ -227,12 +229,12 @@ public class MenuUsuario extends Menu{
 		return null;
 	}
 	// Separe las distintas partes de realizarElPago para que sea mas modular esto nos ayuda
-	// entender más como funciona el codigo en sí 
+	// entender más como funciona el codigo en sí
 	private void funcionPagar(SolicitudServicio servicio, MetodoDePago metodoDePago) {
 		int totalDias;
 		double monto = 0;
 		double montoAPagar;
-		
+
 		if(servicio.getMonto() == 0) {
 			do {
 				System.out.println("Ingrese la cantidad de dia que se demoro el proveedor en terminar su trabajo (1 como minimo)");
@@ -240,9 +242,9 @@ public class MenuUsuario extends Menu{
 				if(totalDias == 0) {
 					System.out.println("Ingrese el total de dias tiene que ser minimo 1");
 				}
-			}				
+			}
 			while (totalDias == 0);
-			usuario.confirmarTareaTerminada(totalDias);	
+			usuario.confirmarTareaTerminada(totalDias);
 		}
 		monto = servicio.getMonto();
 		System.out.println("El monto total a pagar es de: $" + monto);
@@ -253,14 +255,14 @@ public class MenuUsuario extends Menu{
 	// Metodo para pagar el servicio que el usuario contrato
 	private void pagarServicio(SolicitudServicio servicio) {
 		MetodoDePago metodoDePago = null;
-		
-		utils.menuDecoracion("Por favor eliga que metodo de pago va a utilizar", "Opciones", "Efectivo", "Tarjeta de credito", "Transferencia");	
+
+		utils.menuDecoracion("Por favor eliga que metodo de pago va a utilizar", "Opciones", "Efectivo", "Tarjeta de credito", "Transferencia");
 		metodoDePago = elegirMetodo();
 		funcionPagar(servicio, metodoDePago);
-		
-		
+
+
 	}
-	// Metodo para que el usuario pueda contratar algun servicio que ya esta guardado en el 
+	// Metodo para que el usuario pueda contratar algun servicio que ya esta guardado en el
 	// ArrayList de los proveedores de servicio
 	private void contratarServicio() {
 		System.out.println("#################################################################################");
@@ -269,7 +271,7 @@ public class MenuUsuario extends Menu{
 		int i = 1;
 		for (ProveedorServicio<? extends Servicio> proveedorServicio : proveedores) {
 			System.out.println(i + " -Nombre:" + proveedorServicio.getNombre() + "\n "
-					+ "  Servicio:" + proveedorServicio.getServicioPrestado().getNombreServicio() + 
+					+ "  Servicio:" + proveedorServicio.getServicioPrestado().getNombreServicio() +
 					"\n  Tipo:" + proveedorServicio.getTipoServicio());
 			i++;
 		}
@@ -285,8 +287,8 @@ public class MenuUsuario extends Menu{
 		} catch (InputMismatchException e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
-	
+
 }
 

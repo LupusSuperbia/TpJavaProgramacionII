@@ -2,7 +2,7 @@ package Classes;
 
 public class TransferenciaBancaria implements MetodoDePago{
 
-	
+
 	@Override
 	public Usuario getCliente() {
 		// TODO Auto-generated method stub
@@ -12,7 +12,7 @@ public class TransferenciaBancaria implements MetodoDePago{
 	@Override
 	public void setCliente(Usuario cliente) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class TransferenciaBancaria implements MetodoDePago{
 	@Override
 	public void setProveedor(ProveedorServicio<? extends Servicio> proveedor) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class TransferenciaBancaria implements MetodoDePago{
 	@Override
 	public void setDetalles(String detalles) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 

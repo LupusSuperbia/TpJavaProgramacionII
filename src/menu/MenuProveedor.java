@@ -18,14 +18,15 @@ public class MenuProveedor extends Menu{
 	private Servicio servicio;
 	private AdministradorServicio adminServicios;
 	private ProveedorServicio<? extends Servicio> pdServicio;
-	
-	
+
+  // Constructor De MenuProveedor donde les pasamos las listas que vamos a necesitar 
+  // 
 	public MenuProveedor(AdministradorProveedor adminProveedor, AdministradorServicio servicio) {
 		this.adminProveedor = adminProveedor;
 		this.adminServicios = servicio;
 	}
-	
-	
+
+
 	@Override
 	public void main() {
 		this.menuSalir = true;
@@ -38,21 +39,22 @@ public class MenuProveedor extends Menu{
 			} catch (InputMismatchException e) {
 				System.out.println("Por favor ingrese un numero : Error " + e.getMessage());
 				scanner.nextLine();
-			} 			
+			}
 		}
-		
-		 
-		
+
+
+
 	}
 
-
+	// Menu elegido esta en mi SuperClase menu ya que es algo que necesita cualquier menu 
+	
 	@Override
 	public void menuElegido(int numero) {
 		switch (numero) {
 		case 1:
 			crearProveedor();
 			break;
-		case 2 : 
+		case 2 :
 			ingresarProveedor();
 			break;
 		case 3 :
@@ -61,10 +63,12 @@ public class MenuProveedor extends Menu{
 		default:
 			break;
 		}
-		
+
 	}
 
-
+// Metodo para ingresar como el proveedor 
+	// Tengo que mejorar el metodo de salida ya que siempre es un numero mas que el ultimo que aparece
+	// en la lista TODO 
 	private void ingresarProveedor() {
 		boolean menuProveedor = true;
 		while(menuProveedor) {
@@ -85,7 +89,7 @@ public class MenuProveedor extends Menu{
 					this.pdServicio  =  psdServicio.get(index);
 					System.out.println(pdServicio);
 					menuProveedor();
-					
+
 				} else if ( i == index ) {
 					System.out.println("Ha elegido salir");
 					menuProveedor = false;
@@ -94,29 +98,30 @@ public class MenuProveedor extends Menu{
 				}
 				else {
 					System.out.println("Por favor eliga un numero que este dentro del rango");
-				} 				
+				}
 			}
-			
+
 		 catch (InputMismatchException e) {
 			System.out.println("Porfavor ingrese un numero valido" + e.getMessage());
 			scanner.nextLine();
 		} }
-		
+
 		System.out.println("#################################################################################");
 		System.out.println();
 		return;
-		
+
 	}
-	
+  // Metodo donde muestra como es el menu de proveedor hecho para que pueda cambiar el nombre, precio
+	// pueda ver el servicio que ofrece etc
 	private void menuProveedor() {
 		this.menuSalir = true;
-		while(menuSalir) {	
+		while(menuSalir) {
 			try {
 				System.out.println("#################################################################################");
 				System.out.println("# Ha ingresado al menu Proveedor como el proveedor " + this.pdServicio.getNombre());
 				System.out.println("# Elija una de las opciones para que podamos atender lo que necesita nuestro proveedor");
-				
-				
+
+
 				utils.menuSinDecoracionSubMenus("Cambiar Nombre", "Ver servicio", "Cambiar Precio de servicio", "Cambiar comentario", "Salir");
 				int i = scanner.nextInt();
 				scanner.nextLine();
@@ -126,12 +131,12 @@ public class MenuProveedor extends Menu{
 				System.out.println("Error: " + e.getMessage());
 				scanner.nextLine();
 			}
-		} 
+		}
 		return;
-		
+
 	}
 
-
+	// Este es el metodo para elegir que queremos hacer, esta conectado a menuProveedor
 	private void menuElegirProveedor(int i) {
 		switch (i) {
 		case 1:
@@ -156,7 +161,7 @@ public class MenuProveedor extends Menu{
 			this.pdServicio.setComentarios(comentario);
 			System.out.println("Su nombre se ha cambiado exitosamente");
 			return;
-		case 5 : 
+		case 5 :
 			System.out.println("Usted ha decidido salir");
 			this.menuSalir = false;
 			break;
@@ -164,10 +169,11 @@ public class MenuProveedor extends Menu{
 			System.out.println("Ingreso un numero que no esta en el menu");
 			break;
 		}
-		
+
 	}
 
-
+	// Elegir servicio, este metodo tiene una función particular ya que cuando creamos 
+	// un nuevo proveedor va a setear el servicio que queremos 
 	private void elegirServicio() {
 		List<Servicio> servicios = this.adminServicios.getObject();
 		System.out.println("#################################################################################");
@@ -187,10 +193,10 @@ public class MenuProveedor extends Menu{
 					this.servicio = servicios.get(index);
 					this.adminServicios.addObject(this.servicio);
 					return;
-				} else {	
+				} else {
 					System.out.println("Por favor eliga un numero que este dentro del rango");
 					scanner.nextLine();
-				} 
+				}
 			} catch (InputMismatchException e) {
 				System.out.println("Error : " + e.getMessage());
 				scanner.nextLine();
@@ -198,9 +204,10 @@ public class MenuProveedor extends Menu{
 		} while (menuSalir);
 		System.out.println("#################################################################################");
 		System.out.println();
-	
+
 	}
-	
+	// Metodo para crear servicio, por ahora hay dos nada más lo bueno es que 
+	// podemos elegir los diferentes servicios para ver las caracteristicas que tienen cada uno
 	public void crearServicio() {
 		utils.menuDecoracion("Crear Servicio", "Elija una de las opciones del servicio que desee crear", "Servicio Domestico" , "Servicio De Salud");
 		try {
@@ -215,18 +222,18 @@ public class MenuProveedor extends Menu{
 			default:
 				break;
 			}
-			
-			
+
+
 		} catch(InputMismatchException e) {
 			System.out.println("Ingreso una opcion no valida porfavor ingrese un numero que sea valido");
 			scanner.nextLine();
 		}
-		
-	}
-	
 
+	}
+
+// Crear Servicio Salud 
 	public void crearServicioSalud() {
-		
+
 		//ServicioDomestico servicioDomestico = new ServicioDomestico(null, null)
 		TipoDeServicioSalud[] tipoServicio = TipoDeServicioSalud.values();
 		int index = 1;
@@ -235,23 +242,24 @@ public class MenuProveedor extends Menu{
 			System.out.println(index + " - " + tipoDeServicioSalud);
 			index++;
 		}
-		while(menuSalir)
-		try {
-			int opcion = scanner.nextInt();
-			scanner.nextLine();
-			TipoDeServicioSalud tipoElegido = TipoDeServicioSalud.valueOf(opcion);
-			System.out.println("Por favor ingrese el nombre de su servicio");
-			String nombreServicio = scanner.nextLine();
-			ServicioSalud servicioSalud = new ServicioSalud(nombreServicio, tipoElegido);
-			this.servicio = servicioSalud;
-			adminServicios.addObject(servicioSalud);
-			this.menuSalir = false;
-		} catch (InputMismatchException e) {
-			System.out.println("ERROR DE CARACTER NO VALIDO : Por favor elija una opción correcta ");
+		while(menuSalir) {
+			try {
+				int opcion = scanner.nextInt();
+				scanner.nextLine();
+				TipoDeServicioSalud tipoElegido = TipoDeServicioSalud.valueOf(opcion);
+				System.out.println("Por favor ingrese el nombre de su servicio");
+				String nombreServicio = scanner.nextLine();
+				ServicioSalud servicioSalud = new ServicioSalud(nombreServicio, tipoElegido);
+				this.servicio = servicioSalud;
+				adminServicios.addObject(servicioSalud);
+				this.menuSalir = false;
+			} catch (InputMismatchException e) {
+				System.out.println("ERROR DE CARACTER NO VALIDO : Por favor elija una opción correcta ");
+			}
 		}
-		
+
 	}
-	
+	// Crear Servicio Domestico
 	public void crearServicioDomestico() {
 		TipoDeServicioDomesticos[] tipoServicio = TipoDeServicioDomesticos.values();
 		int index = 1;
@@ -260,31 +268,32 @@ public class MenuProveedor extends Menu{
 			System.out.println(index + " - " + tipoDeServicioDomesticos);
 			index++;
 		}
-		while(menuSalir)
-		try {
-			int opcion = scanner.nextInt();
-			scanner.nextLine();
-			TipoDeServicioDomesticos tipoElegido = TipoDeServicioDomesticos.valueOf(opcion);
-			System.out.println("Por favor ingrese el nombre de su servicio");
-			String nombreServicio = scanner.nextLine();
-			ServicioDomestico servicioDomestico = new ServicioDomestico(nombreServicio, tipoElegido);
-			this.servicio = servicioDomestico;
-			adminServicios.addObject(servicioDomestico);
-			this.menuSalir = false;
-		} catch (InputMismatchException e) {
-			System.out.println("ERROR DE CARACTER NO VALIDO : Por favor elija una opción correcta ");
+		while(menuSalir) {
+			try {
+				int opcion = scanner.nextInt();
+				scanner.nextLine();
+				TipoDeServicioDomesticos tipoElegido = TipoDeServicioDomesticos.valueOf(opcion);
+				System.out.println("Por favor ingrese el nombre de su servicio");
+				String nombreServicio = scanner.nextLine();
+				ServicioDomestico servicioDomestico = new ServicioDomestico(nombreServicio, tipoElegido);
+				this.servicio = servicioDomestico;
+				adminServicios.addObject(servicioDomestico);
+				this.menuSalir = false;
+			} catch (InputMismatchException e) {
+				System.out.println("ERROR DE CARACTER NO VALIDO : Por favor elija una opción correcta ");
+			}
 		}
-		
-		
-		
-		
-	}
-	
 
+
+
+
+	}
+
+	// Creamos el proveedor 
 	private void crearProveedor() {
 		/*
 		ProveedorServicio<Servicio> usuario = new ProveedorServicio<Servicio>(nombre, cvu);
-		adminProveedor.addObject(usuario); */ 
+		adminProveedor.addObject(usuario); */
 		System.out.println("Primero necesitamos elegir un servicio existente o crear uno para el proveedor");
 		System.out.println("1 - Elegir servicio");
 		System.out.println("2 - Crear Un Servicio");
@@ -294,7 +303,7 @@ public class MenuProveedor extends Menu{
 		case 1:
 			elegirServicio();
 			break;
-		case 2: 
+		case 2:
 			crearServicio();
 			break;
 		default:

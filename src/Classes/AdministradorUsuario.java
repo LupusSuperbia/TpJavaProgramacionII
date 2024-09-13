@@ -6,13 +6,13 @@ public class AdministradorUsuario extends AdministradorObjetos<Usuario> {
 
 	@Override
 	public void addObject(Usuario obj) {
-		this.objs.add(obj);		
+		this.objs.add(obj);
 	}
 
 	@Override
 	public void removeObject(Usuario obj) {
-		this.objs.remove(obj);		
-		
+		this.objs.remove(obj);
+
 	}
 
 	@Override
@@ -20,5 +20,5 @@ public class AdministradorUsuario extends AdministradorObjetos<Usuario> {
 		return this.objs;
 	}
 
-	
+
 }

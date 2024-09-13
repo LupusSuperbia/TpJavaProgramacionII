@@ -1,9 +1,9 @@
 package Classes;
 
 public class Efectivo implements MetodoDePago  {
-	
-	
-	
+
+
+
 	@Override
 	public Usuario getCliente() {
 		// TODO Auto-generated method stub
@@ -13,7 +13,7 @@ public class Efectivo implements MetodoDePago  {
 	@Override
 	public void setCliente(Usuario cliente) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class Efectivo implements MetodoDePago  {
 	@Override
 	public void setProveedor(ProveedorServicio<? extends Servicio> proveedor) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class Efectivo implements MetodoDePago  {
 	@Override
 	public void setDetalles(String detalles) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 

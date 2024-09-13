@@ -2,16 +2,17 @@ package Classes;
 
 public class ServicioSalud extends Servicio{
 	private TipoDeServicioSalud tipo;
-	
-	
-	
+
+
+
 	public ServicioSalud(String nombre, TipoDeServicioSalud tipo) {
 		super(nombre);
 		this.tipo = tipo;
-	
+
 	}
 
 
+	@Override
 	public String getTipo() {
 		return tipo.toString();
 	}
@@ -25,6 +26,6 @@ public class ServicioSalud extends Servicio{
 	public String toString() {
 		return "ServicioSalud [tipo=" + tipo + ", getNombreServicio()=" + getNombreServicio() + "]";
 	}
-	
-	
+
+
 }

@@ -11,24 +11,24 @@ public enum TipoDeServicioSalud {
     TERAPIA_PSICOLOGICA(5),
     INYECCIÓN(6),
     CUIDADO_DE_ENFERMOS(7),;
-    
-    private int value; 
+
+    private int value;
 	private static Map<Object, Object> map = new HashMap<>();
 	TipoDeServicioSalud(int i) {
 		this.value = i;
 	}
-	
+
 	static {
 		for (TipoDeServicioSalud tipoServicioSalud : TipoDeServicioSalud.values()) {
 			map.put(tipoServicioSalud.value, tipoServicioSalud);
 		}
 	}
-	
-	
+
+
 	public static TipoDeServicioSalud valueOf(int value) {
 		return (TipoDeServicioSalud) map.get(value);
 	}
-	
+
 	public int getValue() {
 		return value;
 	}

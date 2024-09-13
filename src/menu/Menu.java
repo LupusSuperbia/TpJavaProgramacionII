@@ -9,12 +9,12 @@ public abstract class Menu {
 	protected Utilidades utils = new Utilidades();
 	protected boolean salir = false;
 	protected boolean menuSalir = true;
-	
-	
+
+
 	public abstract void main();
-	
+
 	public abstract void menuElegido(int numero);
-		
-	
-	
+
+
+
 	}

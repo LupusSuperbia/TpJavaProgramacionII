@@ -4,27 +4,27 @@ import java.util.List;
 
 public abstract class Persona{
 	// Atributos
-	private String nombre; 
-	private int id; 
+	private String nombre;
+	private int id;
 	private String cvu;
-	protected static int maxId; 
-	private int edad; 
+	protected static int maxId;
+	private int edad;
 	private String rol;
 	protected List<SolicitudServicio> solicitudes;
-	
-	
+
+
 	 public Persona(String nombre, String rol, String cvu) {
 	        this.nombre = nombre;
 	        this.rol = rol;
 	        this.cvu = cvu;
 	        Persona.maxId += 1;
 	        this.id = Persona.maxId ;
-	         
+
 	    }
-	// Metodo 
-	
-	
-	
+	// Metodo
+
+
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -60,7 +60,7 @@ public abstract class Persona{
 		this.rol = rol;
 	}
 
-	
+
 
 	public String getCvu() {
 		return cvu;
@@ -78,10 +78,10 @@ public abstract class Persona{
 	public String toString() {
 		return "Persona [nombre=" + nombre + ", rol=" + rol + "]";
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }
 

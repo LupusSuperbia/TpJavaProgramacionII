@@ -1,7 +1,7 @@
 package Classes;
 
 /**
- * 
+ *
  */
 public class SolicitudServicio {
 	private Usuario usuario;
@@ -11,7 +11,7 @@ public class SolicitudServicio {
 	private double monto;
 	private double totalPagado = 0;
 	private int diasDeTrabajo;
-	
+
 	public SolicitudServicio(Usuario usuario, ProveedorServicio<? extends Servicio> pdServicio) {
 		this.usuario = usuario;
 		this.pdServicio = pdServicio;
@@ -37,9 +37,9 @@ public class SolicitudServicio {
 	public void setMonto(double monto) {
 		this.monto = monto;
 	}
-	
-	
-	
+
+
+
 	public boolean isPagado() {
 		return pagado;
 	}
@@ -55,7 +55,7 @@ public class SolicitudServicio {
 	public void completarMonto(int diasDeTrabajo) {
 		this.monto = this.pdServicio.getPrecio() * diasDeTrabajo;
 	}
-	
+
 	public double getTotalPagado() {
 		return totalPagado;
 	}
@@ -67,11 +67,11 @@ public class SolicitudServicio {
 		return "SolicitudServicio [usuario=" + usuario.toString() + ", pvServicio=" + pdServicio + ", estadoDelTrabajo="
 				+ estadoDelTrabajo + ", monto=" + monto + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 }

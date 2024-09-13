@@ -6,17 +6,17 @@ import java.util.List;
 // Nuestra clase usuario extiende de persona
 public class Usuario extends Persona {
 	private SolicitudServicio solicitud;
-	
+
 	public Usuario(String nombre, String cvu){
-		super(nombre, "Cliente", cvu); // Esto llama al constructor del padre de la clase o sea la super clase 
+		super(nombre, "Cliente", cvu); // Esto llama al constructor del padre de la clase o sea la super clase
 		this.setId(super.getId());
-		this.solicitudes = new ArrayList<SolicitudServicio>();
+		this.solicitudes = new ArrayList<>();
 	}
 	// Metodo para obtener el index del objeto
 	public int getIndex(List<Usuario> usuarios) {
 		return usuarios.indexOf(this);
 	}
-	
+
 	// Metodo para crear una solicitud del usuario hacia un proveedor de servicio
 	public void crearSolicitudDeServicio(ProveedorServicio<? extends Servicio> proveedorServicio) {
 		if (!tieneSolicitudesPendiente()) {
@@ -25,12 +25,12 @@ public class Usuario extends Persona {
 			solicitud.getPvServicio().agregarSolicitud(this.solicitud);
 			this.solicitudes.add(solicitud);
 			System.out.println("Su solicitud se a creado efectivamente");
-			
-		}else { 
+
+		}else {
 			System.out.println("Tiene un servicio que contrato sin pagar");
 		}
-		
-		
+
+
 	}
 	// Metodo para asegurar que el cliente o usuario haya pagado el servicio que contrato
 	// y no pueda contratar otro servicio hasta que lo pague
@@ -38,11 +38,11 @@ public class Usuario extends Persona {
 		for (SolicitudServicio solicitudServicio : solicitudes) {
 			if(!solicitudServicio.isPagado()) {
 				return true;
-			} 
+			}
 		}
 		return false;
 	}
-	
+
 	// Metodo para ver las solicitudes que el usuario pidio
 	public void verSolicitudes() {
 		for (SolicitudServicio solicitudServicio : solicitudes) {
@@ -57,16 +57,16 @@ public class Usuario extends Persona {
 	public List<SolicitudServicio> getSolicitudes() {
 		return this.solicitudes;
 	}
-	
-	// Metodo para confirmar que el proveedor termino la tarea y cuanto dias se demoro 
+
+	// Metodo para confirmar que el proveedor termino la tarea y cuanto dias se demoro
 	// Para después calcular cuanto es lo que tiene que pagar el usuario
 	public void confirmarTareaTerminada(int diasTrabajo) {
 		solicitud.completarMonto(diasTrabajo);
 	}
-	
+
 	public String getCvuCliente() {
 		return this.getCvu();
-	} 
+	}
 
 	// Metodo para realizar el pago del servicio hacia el proveedor
 	public void realizarPago(MetodoDePago metodoDePago, double monto) {
@@ -78,15 +78,15 @@ public class Usuario extends Persona {
 			pago.setStatus(false);
 		}
 		pago.verPago();
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
 }

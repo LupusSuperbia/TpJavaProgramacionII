@@ -1,43 +1,45 @@
 package Classes;
 
 public class Pago {
-  private int id; 
+  private int id;
   private double monto;
   private boolean status;
-  private Usuario cliente; 
+  private Usuario cliente;
   private ProveedorServicio<? extends Servicio> pdServicio;
   private MetodoDePago metodoDePago;
   private static int maxId;
 
-  
+  // Constructor de Pago 
   public Pago(Usuario cliente, ProveedorServicio<? extends Servicio> pdServicio, MetodoDePago metodoDePago,  double monto) {
-	this.cliente = cliente; 
+	this.cliente = cliente;
 	this.pdServicio = pdServicio;
 	this.monto = monto;
-	this.status = false; 
+	this.status = false;
 	this.metodoDePago = metodoDePago;
 	this.id = ++Pago.maxId ;
 }
-  
+
   public int getMaxId() {
 	  return Pago.maxId;
   }
-  
-  
+
+ // Metodo para ver el pago y el estado del mismo 
   public void verPago() {
 	  System.out.println("El estado del pago del usuario " +this.cliente.getNombre() + " hacia el proveedor de servicio " + this.pdServicio.getNombre() + " es de un total de " + monto + " por lo tanto queda un total de  " + (cliente.obtenerSolicitudCreada().getMonto()) + " a pagar y se encuentra en estado " + (this.status ? "PAGADO" : "NO PAGADO"));
-  } 
-  
+  }
+  // Separa la función para usarla a la hora de confirmar el pago ya que podemos tanto pagar el total
+  // del mismo como para restarle del total lo que el usuario podía pagar 
   public void pagarMontoSolicitud(String estadoTrabajo, boolean pagado, double totalPagado, double monto) {
 	  cliente.obtenerSolicitudCreada().setEstadoDelTrabajo(estadoTrabajo);
 	  cliente.obtenerSolicitudCreada().setPagado(pagado);
 	  cliente.obtenerSolicitudCreada().setTotalPagado(totalPagado);
 	  cliente.obtenerSolicitudCreada().setMonto(monto);
   }
-  
-  
+
+  // Confirmamos el pago que sea tanto por tarjeta de credito, efectivo, o transferencia bancara
+  //
   public boolean confirmarPago(double monto) {
-	  
+
 	  if(metodoDePago instanceof TarjetaDeCredito) {
 		  System.out.println("El pago con la tarjeta de credito a sido efectivo");
 	  } else if (metodoDePago instanceof TransferenciaBancaria) {
@@ -47,16 +49,16 @@ public class Pago {
 	}
 	  if(cliente.obtenerSolicitudCreada().getMonto() == monto) {
 		  pagarMontoSolicitud("Terminado", true, monto, 0);
-		  
-		  return true; 
+
+		  return true;
 	  } else {
 		  System.out.println("El pago no se ha realizado pero se desconto " + monto + " del total del servicio que era: $" + cliente.obtenerSolicitudCreada().getMonto());
 		  pagarMontoSolicitud("Falta completar pago", false, monto, (cliente.obtenerSolicitudCreada().getMonto() - monto));
 		  return false;
-	  } 
-	  
+	  }
+
   }
-  
+
 public int getId() {
 	return id;
 }
@@ -107,6 +109,6 @@ public static void setMaxId(int maxId) {
 
 public void setStatus(boolean b) {
 	this.status = b;
-	
+
 }
 }
